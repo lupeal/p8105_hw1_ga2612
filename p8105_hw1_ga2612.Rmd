@@ -16,22 +16,15 @@ nrow(early_january_weather)
 ncol(early_january_weather)
 ```
 
-```{r}
+```{r, message=FALSE}
+library(tidyverse)
 mean(pull(early_january_weather, temp))
 ```
 
 
 #### Data Description
 
-Write a short description of the dataset using inline R code; accessing the dataset help file can be informative. In your discussion, please include:
-
-the variables in this dataset, including names / values of important variables
-the size of the dataset (using nrow and ncol)
-the mean temperature
-
---------------------
-
-The `early_january_weather` dataset contains weather data for New Jersey (`origin`) for the first 15 days of January in 2013. The dataset consists of 358 rows/cases with 15 columns. Each row corresponds to one hour of each day of the first 15 days of January being reported. For each hour, the information reported consists of `temp` = temperature in F, `dewp` = dewpoint in F, `humid` = relative humidity, `wind_dir` = wind direction in degrees, `wind_speed` = wind speed in mph, `wind_gust` = gust speed in mph, `precip` = precipitation in inches, ` pressure` = sea level pressure in millibars, and `visib` = visibility in miles. Additionally, there is a variable (`time_hour`) that corresponds to the date and hour of the recording of information for each row/case. Based on the dataset, the average temperature for those first 15 days of January was about 39.58 degrees Fahrenheit. 
+The `early_january_weather` dataset contains weather data for EWR (`origin`) for the first 15 days of January in 2013. The dataset consists of 358 rows/cases with 15 columns. Each row corresponds to one hour of each day of the first 15 days of January being reported. For each hour, the information reported consists of `temp` = temperature in F, `dewp` = dewpoint in F, `humid` = relative humidity, `wind_dir` = wind direction in degrees, `wind_speed` = wind speed in mph, `wind_gust` = gust speed in mph, `precip` = precipitation in inches, ` pressure` = sea level pressure in millibars, and `visib` = visibility in miles. Additionally, there is a variable (`time_hour`) that corresponds to the date and hour of the recording of information for each row/case. Based on the dataset, the average temperature for those first 15 days of January was about 39.58 degrees Fahrenheit. 
 
 
 
@@ -41,18 +34,23 @@ library(ggplot2)
 
 ggplot(data = early_january_weather, aes(x = time_hour, y = temp, color = humid)) +
   geom_point()
+```
 
+```{r, include=FALSE}
+#saving plot pdf
 ggsave("early_january_weather.pdf")
 ```
 
 #### Patterns description
+
+The plot above represents the temperature (y-axis) for each hour for the first 15 days of January 2013 (x-axis). Based on the plot, we can see that as higher tempertures were reported, lower levels of humidity were reported. Additionally, we can observe that temperatures tend to flucuate between hours, but most drastic changes can be noted between days.
+
 
 
 
 # Problem 2
 
 ```{r}
-library(tidyverse)
 df2 <- tibble(
   sd_norm_samp = rnorm(n = 10, mean = 0, sd = 1),
   norm_samp_pos = sd_norm_samp > 0,
